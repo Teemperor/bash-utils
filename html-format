@@ -1,0 +1,26 @@
+#!/usr/bin/bash
+
+echo '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><title>Code overview</title></head><body>'
+
+for var in "$@"
+do
+  if [ ! -d "$var" ]; then
+  echo "<!-- $var -->"
+  echo "<h3>$var:</h3>"
+  echo '<div '
+  pre=$(kate-syntax-highlighter "$var" | trim-syntax)
+  if [ -z "${pre}" ]; then
+    echo ">" # finish div tag
+    echo "<pre>"
+    cat "$var" | recode ascii..html
+    echo "</pre>"
+  else
+    echo "$pre"
+  fi
+  echo "</div>"
+  fi
+done
+
+echo "</body></html>"
+
+

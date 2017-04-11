@@ -1,0 +1,17 @@
+#!/usr/bin/python
+
+import fileinput
+import sys
+import re
+
+input = ""
+for line in fileinput.input():
+    input += line
+
+start = input.find("<body")
+end = input.find("</body>")
+
+input =  input[start + 5:end] + "\n"
+input = input.strip()
+
+sys.stdout.write(input)

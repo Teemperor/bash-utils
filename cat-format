@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+echo "~~File: $1:"
+cat "$1" | awk '{print "  " $0}'
+echo ""
+
+
