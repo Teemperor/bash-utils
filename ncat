@@ -1,0 +1,8 @@
+#!/usr/bin/python
+import urllib.request
+import sys
+
+response = urllib.request.urlopen(sys.argv[1])
+data = response.read()
+text = data.decode('utf-8')
+print(text)
