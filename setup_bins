@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+clang++ select.cpp -std=c++11 -o select
