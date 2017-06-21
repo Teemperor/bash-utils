@@ -1,0 +1,10 @@
+#!/usr/bin/python
+
+import fileinput
+import sys
+import re
+
+for line in sys.stdin:
+    parts = line.split(":")
+    if len(parts):
+       print(parts[0])

@@ -1,0 +1,16 @@
+#!/usr/bin/python
+
+import sys
+import re
+
+if len(sys.argv) <= 1:
+  sys.stderr.write("No argument to contains_str given\n")
+
+s = sys.argv[1]
+
+for line in sys.stdin:
+  f = open(line.rstrip())
+  content = f.read()
+  if s in content:
+    sys.stdout.write(line)
+  f.close()
