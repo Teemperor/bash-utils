@@ -1,8 +1,9 @@
 #!/bin/bash
 
- git fetch && (cd tools/clang && git fetch)  # Get matching revisions of both trees.
- git checkout master
- git svn rebase -l
- (cd tools/clang &&
+cd ~/llvm-trunk/llvm
+git fetch && (cd tools/clang && git fetch)  # Get matching revisions of both trees.
+git checkout master
+git svn rebase -l
+(cd tools/clang &&
    git checkout master &&
    git svn rebase -l)

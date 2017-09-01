@@ -1,0 +1,5 @@
+#!/bin/bash
+
+git checkout master && git svn rebase -l
+arc patch $1
+cf-branch
