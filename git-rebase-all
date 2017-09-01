@@ -1,0 +1,12 @@
+#!/bin/sh
+
+curr_branch=$(git rev-parse --abbrev-ref HEAD)
+
+git remote update && git checkout master && git pull
+
+for branch in $(git for-each-ref 'refs/heads/*' | cut -d/ -f3 | grep -v master); do 
+    echo "Rebasing branch: $branch"
+    git rebase master $branch ||
+    (git rebase --abort && echo "Failed to rebase branch $branch")
+    echo
+done && git checkout ${curr_branch}
