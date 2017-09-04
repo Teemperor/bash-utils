@@ -1,0 +1,8 @@
+#!/usr/bin/python
+
+import sys
+import os
+
+for line in sys.stdin:
+    if os.path.isfile(line.strip()):
+        print(line.strip())
