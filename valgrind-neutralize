@@ -1,0 +1,14 @@
+#!/usr/bin/python
+
+import sys
+import re
+
+pid = re.compile(r"==\d+==", re.IGNORECASE)
+address = re.compile(r"0x[0-9a-fA-F]+", re.IGNORECASE)
+#fileloc = re.compile(r"\(in ", re.IGNORECASE)
+
+for line in sys.stdin:
+    line = pid.sub("=PID=", line)
+    line = address.sub("0xADDR", line)
+    print(line.strip())
+
