@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+    echo "Need to specify file"
+    exit 1
+fi
+
+git-rebase-all
+cf-branch
+curr_branch=$(git rev-parse --abbrev-ref HEAD)
+git diff master..$curr_branch -U9999 > $1
+git diff master..$curr_branch
