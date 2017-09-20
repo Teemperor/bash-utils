@@ -1,3 +1,3 @@
 #!/bin/bash
-echo "Pushing to $(git rev-parse --abbrev-ref HEAD)"
+echo "Pushing to git:$(git rev-parse --abbrev-ref HEAD)"
 git push my `git rev-parse --abbrev-ref HEAD` --force
