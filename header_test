@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for var in "$@"
+do
+    clang++ -std=c++11 -fsyntax-only "$var"
+done
