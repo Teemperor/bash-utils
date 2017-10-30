@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+swapoff /dev/zram0
+rmmod zram
