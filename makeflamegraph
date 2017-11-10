@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+perf record -F 99 -a -g -- "$@"
+perf script | stackcollapse-perf > .out.perf-folded
+flamegraph .out.perf-folded > flamegraph.svg
+google-chrome-stable flamegraph.svg
+
+rm .out.perf-folded
