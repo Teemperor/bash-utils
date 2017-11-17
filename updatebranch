@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+branch="$1"
+
+fetch
+git checkout master
+git pull
+git checkout $branch
+cf-branch
+fmypush

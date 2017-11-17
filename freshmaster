@@ -1,0 +1,4 @@
+#!/bin/sh
+git checkout master
+git fetch --all
+git pull
