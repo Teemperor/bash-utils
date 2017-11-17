@@ -1,0 +1,3 @@
+#!/bin/bash
+
+clang++ -fsyntax-only -Xclang -ast-dump "$@"
