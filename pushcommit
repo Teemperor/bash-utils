@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+freshmaster
+set +e
+git branch -D $1
+set -e
+git checkout -b $1
+git cherry-pick $2
+fmypush
+freshmaster
+
