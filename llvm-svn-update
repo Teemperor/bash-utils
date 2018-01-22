@@ -1,12 +1,17 @@
 #!/bin/bash
 set -e
+function cleanup_git {
+  git fetch --all
+  git checkout -B master origin/master
+  git reset --hard
+  git clean -fdx
+  git svn rebase -l
+  git svn rebase
+}
+
 cd ~/llvm/trunk
-git fetch && (cd tools/clang && git fetch) && (cd tools/lldb && git fetch)  # Get matching revisions of both trees.
-git checkout master
-git svn rebase -l
-(cd tools/clang &&
-   git checkout master &&
-   git svn rebase -l)
-(cd tools/lldb &&
-   git checkout master &&
-   git svn rebase -l)
+cleanup_git
+cd tools/clang
+cleanup_git
+cd ../lldb
+cleanup_git
