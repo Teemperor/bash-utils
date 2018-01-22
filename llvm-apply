@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
-git checkout master && git svn rebase -l
+git checkout master
 set +e
 git branch -D "arcpatch-$1"
 set -e
 arc patch $1
-rebase
+cf-branch

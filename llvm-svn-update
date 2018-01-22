@@ -5,11 +5,12 @@ function cleanup_git {
   git checkout -B master origin/master
   git reset --hard
   git clean -fdx
+  git svn fetch
   git svn rebase -l
   git svn rebase
 }
 
-cd ~/llvm/trunk
+cd ~/llvm/upstream
 cleanup_git
 cd tools/clang
 cleanup_git

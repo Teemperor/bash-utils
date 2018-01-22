@@ -4,4 +4,5 @@ git checkout master
 git reset --hard HEAD^^
 git pull
 git merge --ff-only arcpatch-$1
-
+git svn fetch
+git svn rebase
