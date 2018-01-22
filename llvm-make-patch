@@ -4,7 +4,7 @@ if [ "$#" -ne 1 ]; then
     echo "Need to specify file"
     exit 1
 fi
-
+set -e
 git-rebase-all
 cf-branch
 curr_branch=$(git rev-parse --abbrev-ref HEAD)
