@@ -4,7 +4,8 @@ import sys
 
 for line in sys.stdin:
     header = line.strip()
-    module_name = header.replace("/", "_")
+    module_name = header.split("/")[-1]
     if module_name.endswith(".h"):
       module_name = module_name[:-2]
+    module_name = module_name.replace("-", "_")
     print("  module " + module_name + " { header \"" + header + "\" export * }")

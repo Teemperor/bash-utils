@@ -1,0 +1,12 @@
+#!/usr/bin/python
+
+import sys
+
+for line in sys.stdin:
+  sline = line.strip()
+  if sline.startswith("//"):
+    continue
+  if not sline.endswith(";"):
+    sys.stdout.write(sline)
+  else:
+    print(line.strip())

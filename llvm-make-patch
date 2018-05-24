@@ -5,7 +5,6 @@ if [ "$#" -ne 1 ]; then
     exit 1
 fi
 set -e
-git-rebase-all
 cf-branch
 curr_branch=$(git rev-parse --abbrev-ref HEAD)
 git diff master..$curr_branch -U9999 > $1

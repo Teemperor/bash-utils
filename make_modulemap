@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+
+modulename=$(echo "$1" | tr --delete / | tr --delete - )
+echo "module $modulename {"
+ls $1/*.h | sort | modulegen_fileonly
+echo "}"
