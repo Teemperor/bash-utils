@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+cd ~/llvm/llvm
+pullrebase
+cd tools/clang
+pullrebase
+cd ../lldb
+pullrebase
