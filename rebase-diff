@@ -1,0 +1,5 @@
+#!/bin/bash
+
+o=$(rebase)
+branch_name=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+git diff master..$branch_name $@

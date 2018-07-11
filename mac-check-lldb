@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cd /Users/teemperor/llvm/dbg/tools/lldb/lit && /usr/bin/python2.7 /Users/teemperor/llvm/dbg/./bin/llvm-lit -v -a --param lldb_site_config=/Users/teemperor/llvm/dbg/tools/lldb/lit/lit.site.cfg --param lldb_unit_site_config=/Users/teemperor/llvm/dbg/tools/lldb/lit/Unit/lit.site.cfg /Users/teemperor/llvm/dbg/tools/lldb/lit

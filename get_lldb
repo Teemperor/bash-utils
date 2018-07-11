@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ps aux | grep "\\./bin/lldb" | grep -v grep | awk '{print $2}'

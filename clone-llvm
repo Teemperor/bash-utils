@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+git clone https://github.com/llvm-mirror/llvm
+cd llvm/tools
+git clone https://github.com/llvm-mirror/clang
+git clone https://github.com/llvm-mirror/lldb
+cd ../projects
+git clone https://github.com/llvm-mirror/libcxx

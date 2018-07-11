@@ -1,6 +1,5 @@
 #!/bin/bash
 
 set -e
-pullrebase
 branch_name=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
 rebase-diff -U9999 > ~/llvm/patches/$branch_name.diff

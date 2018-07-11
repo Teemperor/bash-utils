@@ -5,4 +5,4 @@ set +e
 git branch -D "arcpatch-$1"
 set -e
 arc patch $1
-cf-branch
+#cf-branch
