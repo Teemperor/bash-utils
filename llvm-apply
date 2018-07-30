@@ -4,5 +4,5 @@ git checkout master
 set +e
 git branch -D "arcpatch-$1"
 set -e
-arc patch $1
+arc patch --skip-dependencies $1
 #cf-branch

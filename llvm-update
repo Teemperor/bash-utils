@@ -1,0 +1,7 @@
+#!/bin/bash
+
+pullrebase
+(cd tools/clang && pullrebase)
+(cd tools/lldb && pullrebase)
+(cd projectx/libcxx && pullrebase)
+(cd projectx/libcxxabi && pullrebase)
