@@ -1,0 +1,7 @@
+#!/usr/bin/python
+
+import sys
+
+for line in sys.stdin:
+  if len(line.strip()) != 0:
+    print(line.rstrip())

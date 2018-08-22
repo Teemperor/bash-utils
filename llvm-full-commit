@@ -1,0 +1,37 @@
+#!/bin/bash
+
+set -e
+
+ERROR='\033[0;31m'
+PROGRESS='\033[0;34m'
+SUCCESS='\033[0;32m'
+NC='\033[0m' # No Color
+
+printf "${PROGRESS}[Preparing to merge $1]${NC}\n"
+
+printf "${PROGRESS}[Updating SVN...]${NC}\n"
+llvm-svn-update
+printf "${SUCCESS}[Updating SVN - OK]${NC}\n"
+printf "${PROGRESS}[Applying patch]${NC}\n"
+llvm-apply $1
+printf "${SUCCESS}[Applying patch - OK]${NC}\n"
+printf "${PROGRESS}[Merging patch]${NC}\n"
+llvm-merge $1
+printf "${SUCCESS}[Merging patch - OK]${NC}\n"
+
+git show
+read -p "Commit patch (y/n)?" choice
+case "$choice" in
+  y|Y ) printf "${SUCCESS}[Accepted patch]${NC}\n";;
+  n|N ) printf "${ERROR}[Rejected patch]${NC}\n" ; exit 1 ;;
+  * ) echo "invalid";;
+esac
+
+printf "${PROGRESS}[Commiting patch]${NC}\n"
+llvm-commit
+printf "${SUCCESS}[Commiting patch - OK]${NC}\n"
+printf "${PROGRESS}[Updating SVN]${NC}\n"
+llvm-svn-update
+printf "${SUCCESS}[Updating SVN - OK]${NC}\n"
+
+printf "${SUCCESS}[Successfully merged $1]${NC}\n"

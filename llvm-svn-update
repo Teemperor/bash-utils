@@ -6,6 +6,7 @@ function cleanup_git {
   git checkout -B master origin/master
   git checkout master
   git reset --hard
+  git reset --hard HEAD^
   git clean -fdx
   git svn fetch
   git svn rebase -l
