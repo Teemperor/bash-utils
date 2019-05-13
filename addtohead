@@ -9,7 +9,7 @@ set -e
 last_author=`git log --format='%an' HEAD^!`
 
 if [ "$last_author" != "Raphael Isemann" ] ; then
-  echo "Last commit was not by my, but by $last_author"
+  echo "Last commit was not by me, but by $last_author"
   exit 1
 fi
 
