@@ -1,0 +1,5 @@
+#!/usr/bin/env python3
+
+import psutil, os, sys
+if psutil.Process(int(sys.argv[1])).ppid() == 1:
+  print(sys.argv[1])
