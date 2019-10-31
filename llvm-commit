@@ -1,3 +1,97 @@
-#!/bin/bash
-set -e
-git svn dcommit
+#!/usr/bin/python3
+
+import subprocess
+import sys
+import time
+
+my_mail = "teemperor@gmail.com"
+
+def git_cmd(args):
+  cmd = "git " + " ".join(args)
+  st = subprocess.run(['git'] + args, stdout=subprocess.PIPE)
+  if st.returncode != 0:
+    print("Error running " + cmd + "\n" + st.stdout.decode('utf-8'))
+    sys.exit(1)
+  return st.stdout.decode('utf-8')
+
+git_cmd(['status'])
+
+branch = git_cmd(["rev-parse", "--abbrev-ref", "HEAD"]).strip()
+if branch != "master":
+  print("Not on master branch but on branch " + branch)
+  sys.exit(1)
+
+class Remote:
+  def __init__(self, name, url, kind):
+    self.name = name
+    self.url = url
+    self.kind = kind
+  def __repr__(self):
+    return self.name + " " + self.url + " " + self.kind
+
+remotes = []
+for remote in git_cmd(['remote', '--verbose']).strip().splitlines():
+  parts = remote.split("\t")
+  remote_name = parts[0].strip()
+  remote_url = parts[1].split(" ")[0]
+  remote_kind = parts[1].split(" ")[1]
+  remotes.append(Remote(remote_name, remote_url, remote_kind))
+
+def has_remote_with_name(remotes, name):
+  for remote in remotes:
+    if remote.name == name:
+      return True
+  return False
+
+push_origin_name = "LLVM_UPSTREAM_PUSH"
+
+if not has_remote_with_name(remotes, push_origin_name):
+  print("Adding missing push remote for LLVM upstream")
+  git_cmd(['remote', 'add', push_origin_name, 'git@github.com:llvm/llvm-project'])
+
+sys.stdout.write("Fetching push remote... ")
+sys.stdout.flush()
+git_cmd(['fetch', '-q', push_origin_name])
+print("Done!")
+
+different_commits = git_cmd(['log', '--format=%ce', push_origin_name + '/master..master']).strip().splitlines()
+different_commits_to_show = git_cmd(['log', '--format=%ce %s %cd\n%b', push_origin_name + '/master..master'])
+if len(different_commits) == 0:
+  print("No commits to push?")
+  sys.exit(1)
+
+if len(different_commits) > 1:
+  print("Trying to push more than one commit?")
+  print(different_commits_to_show)
+  sys.exit(1)
+
+assert len(different_commits) == 1
+
+if different_commits[0] != my_mail:
+  print("Trying to push someone else's commit?")
+  print(different_commits)
+  sys.exit(1)
+
+print("Pushing following commit:")
+print("###############################################")
+sys.stdout.write(different_commits_to_show)
+print("###############################################")
+
+def confirm():
+    answer = ""
+    while answer not in ["yes", "no"]:
+        answer = input("Pushing commits to remote. OK? [yes/no] ").lower()
+    return answer == "yes"
+
+if not confirm():
+  print("Aborting...")
+  sys.exit(1)
+
+sys.stdout.write("Waiting 5 seconds to let you double check")
+sys.stdout.flush()
+time.sleep(5)
+
+sys.stdout.write("Pushing commit...")
+sys.stdout.flush()
+git_cmd(['push', push_origin_name, 'master'])
+print("Done!")
