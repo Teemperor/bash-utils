@@ -87,8 +87,7 @@ if not confirm():
   print("Aborting...")
   sys.exit(1)
 
-sys.stdout.write("Waiting 5 seconds to let you double check")
-sys.stdout.flush()
+print("Waiting 5 seconds to let you double check")
 time.sleep(5)
 
 sys.stdout.write("Pushing commit...")

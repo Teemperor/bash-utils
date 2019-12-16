@@ -1,0 +1,2 @@
+#!/bin/bash
+open "https://github.com/apple/llvm-project/compare/swift/master-next...Teemperor:$(git symbolic-ref --short -q HEAD | tr -d '\n')?expand=1"
