@@ -1,0 +1,12 @@
+#!/usr/bin/python
+
+import sys
+import os
+
+cmd = "\" \"".join(sys.argv[1:])
+cmd = '"' + cmd + '"'
+
+for line in map(str.rstrip, sys.stdin):
+  cmd = cmd[:]
+  new_cmd = cmd.replace("INPUT", line)
+  os.system(new_cmd)

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo 'cmake_minimum_required(VERSION 3.13.4)'
+echo "project($1)"
+
+find . -type d | awk '{print "include_directories(\"" $0 "\")"}'
+
+echo "add_executable($1"
+
+find . -name '*.h'
+find . -name '*.c'
+find . -name '*.cc'
+find . -name '*.cxx'
+find . -name '*.cpp'
+
+echo ')'

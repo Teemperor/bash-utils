@@ -2,8 +2,9 @@
 
 import os
 import sys
+import time
 
-def check_pid(pid):        
+def check_pid(pid):
     """ Check For the existence of a unix pid. """
     try:
         os.kill(pid, 0)
@@ -12,6 +13,5 @@ def check_pid(pid):
     else:
         return True
 
-while True:
-  if not check_pid(int(sys.argv[1])):
-    break
+while check_pid(int(sys.argv[1])):
+  time.sleep(1)

@@ -1,8 +1,5 @@
-#!/bin/bash
-
-set -e
 rm -f fuckperf
-/usr/bin/perf record -F 1000 -a -o fuckperf -g -- "$@"
+/usr/bin/perf record -a -o fuckperf -g -p "$@" -c 1000
 /usr/bin/perf report -d pcre2test --stdio -i fuckperf --no-children -n -g folded,0,caller,count -s comm | awk '/^ / { comm = $3 } /^[0-9]/ { print comm ";" $2, $1 }' > foldedfuck
 flamegraph.pl foldedfuck > flamegraph.svg
 google-chrome-stable flamegraph.svg

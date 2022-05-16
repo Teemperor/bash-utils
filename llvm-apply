@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-git checkout master
+git checkout main
 set +e
 git branch -D "arcpatch-$1"
 set -e

@@ -1,0 +1,15 @@
+#!/usr/bin/python
+
+import fileinput
+import subprocess
+import sys
+
+i = 0
+for line in fileinput.input("-"):
+    out = subprocess.check_output(["/usr/bin/file", line.strip()], timeout=1)
+    i += 1
+    if sys.argv[1] in out.decode("utf-8"):
+      print(line.strip())
+      sys.stdout.flush()
+    #else:
+    #  print("SDF" + str(i))

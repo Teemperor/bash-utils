@@ -17,8 +17,8 @@ def git_cmd(args):
 git_cmd(['status'])
 
 branch = git_cmd(["rev-parse", "--abbrev-ref", "HEAD"]).strip()
-if branch != "master":
-  print("Not on master branch but on branch " + branch)
+if branch != "main":
+  print("Not on main branch but on branch " + branch)
   sys.exit(1)
 
 class Remote:
@@ -54,8 +54,8 @@ sys.stdout.flush()
 git_cmd(['fetch', '-q', push_origin_name])
 print("Done!")
 
-different_commits = git_cmd(['log', '--format=%ce', push_origin_name + '/master..master']).strip().splitlines()
-different_commits_to_show = git_cmd(['log', '--format=%ce %s %cd\n%b', push_origin_name + '/master..master'])
+different_commits = git_cmd(['log', '--format=%ce', push_origin_name + '/main..main']).strip().splitlines()
+different_commits_to_show = git_cmd(['log', '--format=%ce %s %cd\n%b', push_origin_name + '/main..main'])
 if len(different_commits) == 0:
   print("No commits to push?")
   sys.exit(1)
@@ -92,5 +92,5 @@ time.sleep(5)
 
 sys.stdout.write("Pushing commit...")
 sys.stdout.flush()
-git_cmd(['push', push_origin_name, 'master'])
+git_cmd(['push', push_origin_name, 'main'])
 print("Done!")

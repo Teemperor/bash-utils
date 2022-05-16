@@ -1,8 +1,6 @@
 #!/bin/bash
 
 branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
-git checkout master
-git pull
-git checkout "$branch"
-git rebase master
+fetch
+git rebase origin/main
 
