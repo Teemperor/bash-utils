@@ -1,0 +1,22 @@
+#!/usr/bin/python
+
+import sys
+import os
+import subprocess
+
+cmd = "\" \"".join(sys.argv[2:])
+cmd = '"' + cmd + '"'
+
+
+timeoutSeconds = int(sys.argv[1])
+
+for line in map(str.rstrip, sys.stdin):
+  cmd = cmd[:]
+  new_cmd = cmd.replace("INPUT", line)
+  try:
+    subprocess.check_output(new_cmd, shell=True, stderr=subprocess.STDOUT, timeout=timeoutSeconds)
+  except subprocess.CalledProcessError as exc:
+    print("Failed", exc.returncode)
+    print(exc.output)
+  except subprocess.TimeoutExpired as exc:
+    print("Timed out")
